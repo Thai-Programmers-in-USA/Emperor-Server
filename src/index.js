@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use('/status', (req, res, next) => {
+app.use('/statuss', (req, res, next) => {
   res.status(200).send('Server is running');
 });
 
