@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   server:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
     depends_on:
       - db
     environment:
@@ -15,6 +17,23 @@ services:
       - /app/node_modules
     ports:
       - 3000:3000
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      - db
+    environment:
+      DB_SCHEMA: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 4000:3000
 
   db:
     image: 'postgres:13'
