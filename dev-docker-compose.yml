@@ -7,11 +7,13 @@ services:
       dockerfile: Dockerfile.dev
     depends_on:
       - db
-    environment:
-      DB_SCHEMA: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: db
+    # environment:
+    #   DB_SCHEMA: postgres
+    #   DB_USER: postgres
+    #   DB_PASSWORD: postgres
+    #   DB_HOST: localhost
+    #   DB_PORT: 5432
+    #   DB_DIALECT: postgres
     volumes:
       - .:/app
       - /app/node_modules
@@ -24,11 +26,6 @@ services:
       dockerfile: Dockerfile.test
     depends_on:
       - db
-    environment:
-      DB_SCHEMA: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: db
     volumes:
       - .:/app
       - /app/node_modules
