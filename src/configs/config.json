@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "schema": "emperor_dev",
+    "host": "db",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "schema": "emperor_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "testLocal": {
+    "username": "postgres",
+    "password": "postgres",
+    "schema": "emperor_test_local",
+    "host": "db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": false
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../configs/postgres');
+const sequelize = require('../configs/config');
 
 const ProductCategory = sequelize.define('productCategory', {
   id: {

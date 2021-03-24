@@ -4,7 +4,8 @@
   "description": "Express.js server for emperor shop",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "NODE_ENV=test jest --coverage --detactOpenHandles --maxWorkers=1 -- testTimeout=10000",
+    "test-local": "NODE_ENV=testLocal port=3002 jest --watchAll --coverage --detactOpenHandles --maxWorkers=1 -- testTimeout=10000",
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js"
   },

@@ -3,7 +3,8 @@ const Category = require('./category.model');
 const ProductCategory = require('./product-category.model');
 const Stock = require('./stock.mode');
 const Photo = require('./photo.model');
-const sequelize = require('../configs/postgres');
+const Employee = require('./employee.model');
+const sequelize = require('../configs/config');
 
 module.exports = async function () {
   try {
@@ -21,8 +22,8 @@ module.exports = async function () {
     Product.hasMany(Photo);
 
     // ? Reset schema
-    // return sequelize.sync({force: true});
-    return sequelize.sync();
+    return sequelize.sync({ force: true });
+    // return sequelize.sync();
 
     // const result = await sequelize.sync();
     // return result;

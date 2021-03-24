@@ -1,5 +1,5 @@
 const { BOOLEAN, STRING, INTEGER } = require('sequelize');
-const sequelize = require('../configs/postgres');
+const sequelize = require('../configs/config');
 
 const Photo = sequelize.define('photo', {
   id: {
