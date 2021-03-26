@@ -4,8 +4,8 @@
   "description": "Express.js server for emperor shop",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --coverage --detactOpenHandles --maxWorkers=1 -- testTimeout=10000",
-    "test-local": "NODE_ENV=testLocal port=3002 jest --watchAll --coverage --detactOpenHandles --maxWorkers=1 -- testTimeout=10000",
+    "test": "NODE_ENV=test LOG_LEVEL=off jest --coverage --detectOpenHandles --maxWorkers=1 --testTimeout=10000",
+    "test-local": "NODE_ENV=testLocal PORT=3005 LOG_LEVEL=off jest --verbose --watchAll --coverage --detectOpenHandles --maxWorkers=1 --testTimeout=10000",
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js"
   },
@@ -27,15 +27,20 @@
   },
   "homepage": "https://github.com/Thai-Programmers-in-USA/Emperor-Server#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "jsonwebtoken": "^8.5.1",
     "log4js": "^6.3.0",
     "pg": "^8.5.1",
+    "pm2": "^4.5.5",
     "sequelize": "^6.5.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
     "jest": "^26.6.3",
+    "node-mocks-http": "^1.10.1",
     "supertest": "^6.1.3"
   }
 }

@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../configs/config');
+const { sequelize } = require('../configs/config');
 
 const Employee = sequelize.define('employee', {
   id: {
@@ -8,7 +8,7 @@ const Employee = sequelize.define('employee', {
     autoIncrement: true,
     primaryKey: true,
   },
-  name: {
+  fname: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -19,15 +19,15 @@ const Employee = sequelize.define('employee', {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull:false
+    allowNull: false,
   },
   phone: {
-    type: DataTypes.STRING
-  }
+    type: DataTypes.STRING,
+  },
 });
 
 module.exports = Employee;

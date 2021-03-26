@@ -1,0 +1,17 @@
+{
+  "development": {
+    "SECRET_TOKEN": "password",
+    "TOKEN_ACTIVE_DURATION": "356h"
+  },
+  "test": {
+    "SECRET_TOKEN": "password",
+    "TOKEN_ACTIVE_DURATION": "10"
+  },
+  "testLocal": {
+    "SECRET_TOKEN": "password",
+    "TOKEN_ACTIVE_DURATION": "10"
+  },
+  "production": {
+    
+  }
+}
