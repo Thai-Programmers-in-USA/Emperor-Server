@@ -11,14 +11,16 @@
     "password": "postgres",
     "schema": "emperor_test",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "testLocal": {
     "username": "postgres",
     "password": "postgres",
     "schema": "emperor_test_local",
     "host": "db",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "dialectOptions": {

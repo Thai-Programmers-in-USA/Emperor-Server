@@ -4,7 +4,7 @@ const ProductCategory = require('./product-category.model');
 const Stock = require('./stock.mode');
 const Photo = require('./photo.model');
 const Employee = require('./employee.model');
-const sequelize = require('../configs/config');
+const { sequelize } = require('../configs/config');
 
 module.exports = async function () {
   try {

@@ -1,5 +1,5 @@
 const { STRING, INTEGER } = require('sequelize');
-const sequelize = require('../configs/config');
+const { sequelize } = require('../configs/config');
 
 const Stock = sequelize.define('stock', {
   id: {
