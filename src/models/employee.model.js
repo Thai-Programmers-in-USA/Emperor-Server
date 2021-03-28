@@ -8,11 +8,11 @@ const Employee = sequelize.define('employee', {
     autoIncrement: true,
     primaryKey: true,
   },
-  fname: {
+  fName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lname: {
+  lName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -27,6 +27,10 @@ const Employee = sequelize.define('employee', {
   },
   phone: {
     type: DataTypes.STRING,
+  },
+  authenticationLevel: {
+    type: DataTypes.ENUM({ values: ['admin', 'editor', 'user'] }),
+    allowNull: false,
   },
 });
 
