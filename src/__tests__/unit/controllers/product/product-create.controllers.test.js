@@ -51,15 +51,25 @@ const CategoryModel = require('../../../../models/category.model');
 jest.mock('../../../../models/product.model');
 const ProductModel = require('../../../../models/product.model');
 
+jest.mock('../../../../models/stock.model');
+const StockModel = require('../../../../models/stock.model');
+
 const validationErrorsObj = require('../../__mocks__/data/validationResult.json');
 
-const req = httpMock.createRequest();
-const res = httpMock.createResponse();
+const productsMock = require('../../__mocks__/data/product.json');
 
-req.body;
+const req = httpMock.createRequest();
+let res = httpMock.createResponse();
+
+const includeOption = [
+  { model: PhotoModel, as: 'photos' },
+  { model: StockModel, as: 'stocks' },
+  CategoryModel,
+];
 
 describe('Test Product Controller - create - test validator', () => {
   beforeEach(() => {
+    res = httpMock.createResponse();
     // INFO Mock validationResult return { isEmpty: () => true}
     validationResult.mockReturnValue({
       isEmpty: () => true,
@@ -111,6 +121,7 @@ describe('Test Product Controller - create - test validator', () => {
 
 describe('Test Product Controller - create - calling S3Util.uploadPhotoToS3', () => {
   beforeEach(() => {
+    res = httpMock.createResponse();
     // INFO Mock validationResult return { isEmpty: () => true}
     validationResult.mockReturnValue({
       isEmpty: () => true,
@@ -126,7 +137,7 @@ describe('Test Product Controller - create - calling S3Util.uploadPhotoToS3', ()
 
   it('should not call uploadPhotoToS3() - if there is no photo', async () => {
     // req.files is array of `photos` files
-    req.files = [];
+    req.files = undefined;
 
     // INFO Call function
     await ProductControllers.createProduct(req, res, () => {});
@@ -145,7 +156,7 @@ describe('Test Product Controller - create - calling S3Util.uploadPhotoToS3', ()
     await ProductControllers.createProduct(req, res, () => {});
     expect.assertions(2);
     expect(S3Util.uploadFileToS3).toHaveBeenCalledTimes(1);
-    expect(S3Util.uploadFileToS3).toHaveBeenCalledWith(req.files, 'image');
+    expect(S3Util.uploadFileToS3).toHaveBeenCalledWith(req.files, 'images');
   });
 
   it('should call s3 uploadPhotoToS3() only once - if there is more than one photo', async () => {
@@ -154,18 +165,181 @@ describe('Test Product Controller - create - calling S3Util.uploadPhotoToS3', ()
     await ProductControllers.createProduct(req, res, () => {});
     expect.assertions(2);
     expect(S3Util.uploadFileToS3).toHaveBeenCalledTimes(1);
-    expect(S3Util.uploadFileToS3).toHaveBeenCalledWith(req.files, 'image');
+    expect(S3Util.uploadFileToS3).toHaveBeenCalledWith(req.files, 'images');
   });
 });
 
-describe('Test Product Controller - create - ')
-
-describe('Test Product Controller - create - calling PhotoModel.addProduct', () => {
-  beforeEach(()=>{
+describe('Test Product Controller - create - creating product with "Photo" association', () => {
+  beforeAll(() => {
+    req.body = productsMock['request']['withPhoto'];
+  });
+  beforeEach(() => {
+    res = httpMock.createResponse();
     // INFO Mock validationResult return { isEmpty: () => true}
     validationResult.mockReturnValue({
       isEmpty: () => true,
       errors: [],
-    })
-  })
+    });
+
+    // INFO Mock upload photo to s3 to return ['photo1', 'photo2']
+    S3Util.uploadFileToS3.mockReturnValue(['photo1', 'photo2']);
+  });
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should call next function with error, if Product.create() failed', async () => {
+    ProductModel.create.mockReturnValue(undefined);
+
+    let error;
+    await ProductControllers.createProduct(req, res, (err) => {
+      error = err;
+    });
+
+    expect.assertions(3);
+    expect(error).toBeInstanceOf(Error);
+    expect(error).toHaveProperty('statusCode', 500);
+    expect(error).toHaveProperty('message', 'Internal server errors');
+  });
+
+  it('should call Product.create() with the array of photo objects', async () => {
+    // INFO set req.body
+    // req.body = productsMock['request']['withPhoto'];
+    const input = req.body;
+    delete input.categories;
+
+    // INFO Mock ProductModel.create()
+    ProductModel.create = jest.fn();
+
+    await ProductControllers.createProduct(req, res, () => {});
+
+    expect.assertions(3);
+
+    expect(ProductModel.create).toHaveBeenCalled();
+    expect(ProductModel.create).toHaveBeenCalledTimes(1);
+    expect(ProductModel.create).toHaveBeenCalledWith(
+      {
+        ...input,
+        photos: [
+          { path: 'photo1', position: 0 },
+          { path: 'photo2', position: 1 },
+        ],
+      },
+      { include: includeOption }
+    );
+  });
+
+  it('should return product with photos field to the client', async () => {
+    const input = req.body;
+    delete input.categories;
+
+    ProductModel.create.mockReturnValue(productsMock['response']['withPhoto']);
+
+    await ProductControllers.createProduct(req, res, () => {});
+
+    expect.assertions(8);
+    expect(res).toHaveProperty('statusCode', 201);
+    const data = res._getJSONData();
+    expect(data.msg).toBe('Successfully created product');
+    expect(data.createdProduct).toHaveProperty('photos');
+    expect(data.createdProduct.photos).toHaveLength(2);
+    expect(data.createdProduct.photos[0]).toHaveProperty(
+      'path',
+      'product_photo_1'
+    );
+    expect(data.createdProduct.photos[0]).toHaveProperty('position', 0);
+    expect(data.createdProduct.photos[1]).toHaveProperty(
+      'path',
+      'product_photo_2'
+    );
+    expect(data.createdProduct.photos[1]).toHaveProperty('position', 1);
+  });
 });
+
+describe('Test Product Controller - create - creating product with "Stock" association', () => {
+  beforeAll(() => {
+    req.body = productsMock['request']['withPhotoStock'];
+  });
+  beforeEach(() => {
+    res = httpMock.createResponse();
+    validationResult.mockReturnValue({ isEmpty: () => true, errors: [] });
+    S3Util.uploadFileToS3.mockReturnValue([
+      'product_photo_1',
+      'product_photo_2',
+      'stock_photo_1',
+      'stock_photo_2',
+      'stock_photo_3',
+    ]);
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
+  });
+
+  it('should call Product.create with correct product photos and stock photos', async () => {
+    const input = req.body;
+    delete input.categories;
+    input.photos = productsMock['response']['withPhotoStock']['photos'];
+    input.stocks = productsMock['response']['withPhotoStock']['stocks'];
+
+    const createProductSyp = jest.spyOn(ProductModel, 'create');
+    createProductSyp.mockResolvedValue(
+      productsMock['response']['withPhotoStock']
+    );
+
+    await ProductControllers.createProduct(req, res, () => {});
+
+    expect.assertions(2);
+    expect(createProductSyp).toHaveBeenCalledTimes(1);
+    expect(createProductSyp).toHaveBeenCalledWith(
+      { ...input },
+      { include: includeOption }
+    );
+  });
+
+  it('should return the created product with stock field in it', async () => {
+    const input = req.body;
+    delete input.categories;
+    input.photos = productsMock['response']['withPhotoStock']['photos'];
+    input.stocks = productsMock['response']['withPhotoStock']['stocks'];
+
+    const createProductSyp = jest.spyOn(ProductModel, 'create');
+    createProductSyp.mockResolvedValue(
+      productsMock['response']['withPhotoStock']
+    );
+
+    await ProductControllers.createProduct(req, res, () => {});
+
+    expect.assertions(17);
+    expect(res).toHaveProperty('statusCode', 201);
+    const data = res._getJSONData();
+    expect(data).toHaveProperty('createdProduct');
+    expect(data.createdProduct).toHaveProperty('stocks');
+    expect(data.createdProduct.stocks).toBeInstanceOf(Array);
+    expect(data.createdProduct.stocks).toHaveLength(3);
+    expect(data.createdProduct.stocks[0]).toHaveProperty('name', 'stock1');
+    expect(data.createdProduct.stocks[0]).toHaveProperty('price', 400);
+    expect(data.createdProduct.stocks[0]).toHaveProperty('quantity', 100);
+    expect(data.createdProduct.stocks[0]).toHaveProperty(
+      'photo',
+      'stock_photo_1'
+    );
+    expect(data.createdProduct.stocks[1]).toHaveProperty('name', 'stock2');
+    expect(data.createdProduct.stocks[1]).toHaveProperty('price', 400);
+    expect(data.createdProduct.stocks[1]).toHaveProperty('quantity', 200);
+    expect(data.createdProduct.stocks[1]).toHaveProperty(
+      'photo',
+      'stock_photo_2'
+    );
+    expect(data.createdProduct.stocks[2]).toHaveProperty('name', 'stock3');
+    expect(data.createdProduct.stocks[2]).toHaveProperty('price', 500);
+    expect(data.createdProduct.stocks[2]).toHaveProperty('quantity', 50);
+    expect(data.createdProduct.stocks[2]).toHaveProperty(
+      'photo',
+      'stock_photo_3'
+    );
+  });
+});
+
+describe('Test Product Controller - create - creating product with "Category" association', () => {});

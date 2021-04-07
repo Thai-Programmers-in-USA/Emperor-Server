@@ -1,7 +1,7 @@
 const Product = require('./product.model');
 const Category = require('./category.model');
 const ProductCategory = require('./product-category.model');
-const Stock = require('./stock.mode');
+const Stock = require('./stock.model');
 const Photo = require('./photo.model');
 const Employee = require('./employee.model');
 const { sequelize } = require('../configs/config');

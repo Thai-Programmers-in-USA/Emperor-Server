@@ -8,5 +8,7 @@ module.exports = (app) => {
 
   router.post('/api/product', multipleUpload, ProductControllers.createProduct);
 
+  router.get('/api/products', ProductControllers.getProducts);
+
   app.use(router);
 };

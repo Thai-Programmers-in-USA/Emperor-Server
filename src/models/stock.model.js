@@ -1,4 +1,4 @@
-const { STRING, INTEGER } = require('sequelize');
+const { STRING, INTEGER, DOUBLE } = require('sequelize');
 const { sequelize } = require('../configs/config');
 
 const Stock = sequelize.define('stock', {
@@ -12,8 +12,8 @@ const Stock = sequelize.define('stock', {
     type: STRING,
     allowNull: false,
   },
-  value: {
-    type: STRING,
+  price: {
+    type: DOUBLE,
     allowNull: false,
   },
   quantity: {
@@ -22,7 +22,7 @@ const Stock = sequelize.define('stock', {
   },
   photo: {
     type: STRING,
-    allowNull: true,
+    allowNull: false,
   },
 });
 
