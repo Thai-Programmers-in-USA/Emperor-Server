@@ -8,10 +8,6 @@ const Photo = sequelize.define('photo', {
     autoIncrement: true,
     primaryKey: true,
   },
-  isMainPhoto: {
-    type: BOOLEAN,
-    allowNull: false,
-  },
   path: {
     type: STRING,
     allowNull: false,

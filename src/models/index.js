@@ -22,8 +22,8 @@ module.exports = async function () {
     Product.hasMany(Photo);
 
     // ? Reset schema
-    return sequelize.sync({ force: true });
-    // return sequelize.sync();
+    // return sequelize.sync({ force: true });
+    return sequelize.sync();
 
     // const result = await sequelize.sync();
     // return result;
