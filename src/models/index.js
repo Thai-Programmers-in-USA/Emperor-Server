@@ -23,7 +23,7 @@ module.exports = async function () {
 
     // ? Reset schema
     // return sequelize.sync({ force: true });
-    return sequelize.sync();
+    return await sequelize.sync();
 
     // const result = await sequelize.sync();
     // return result;
