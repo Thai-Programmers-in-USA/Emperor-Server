@@ -6,7 +6,7 @@ module.exports = function (app) {
   const router = express.Router();
 
   router.post(
-    '/api/signin',
+    '/signin',
     [
       body('email').trim().isEmail().withMessage('Plase enter a valid email'),
       body('password').isLength({ min: 6 }).withMessage('Invalid password'),
@@ -14,5 +14,5 @@ module.exports = function (app) {
     AuthControllers.signin
   );
 
-  app.use(router);
+  app.use('/api', router);
 };

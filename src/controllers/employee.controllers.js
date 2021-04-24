@@ -40,10 +40,24 @@ exports.createUser = async (req, res, next) => {
     delete createdEmployee.password;
     delete createdEmployee.authenticationLevel;
 
+    const resEmployee = {
+      id: createdEmployee.id,
+      fName: createdEmployee.fName,
+      lName: createdEmployee.lName,
+      email: createdEmployee.email,
+      phone: createdEmployee.phone,
+      authenticationLevel: createdEmployee.authenticationLevel,
+      createdAt: createdEmployee.createdAt,
+      updatedAt: createdEmployee.updatedAt,
+    };
+
     // INFO return createdUser data to client without password
     res
       .status(201)
-      .json({ msg: 'Successfully created an employee', createdEmployee });
+      .json({
+        msg: 'Successfully created an employee',
+        createdEmployee: resEmployee,
+      });
   } catch (error) {
     error.statusCode = error.statusCode || 500;
     next(error);

@@ -28,25 +28,25 @@ const request = require('supertest');
 // INFO Import modules
 
 // INFO Mocks
-const mockEmployeeList = require('../__mocks__/data/employees.json');
+const mockEmployeeList = require('../../__mocks__/data/employees.json');
 
 // SUB TOPIC: mock database connection
-jest.mock('../../../models/index');
-const db = require('../../../models/index');
+jest.mock('../../../../models/index');
+const db = require('../../../../models/index');
 
 // SUB TOPIC: mock bcrypt
 const bcrypt = require('bcrypt');
 
 // SUB TOPIC: mock Employee DAO
-jest.mock('../../../models/employee.model');
-const Employee = require('../../../models/employee.model');
+jest.mock('../../../../models/employee.model');
+const Employee = require('../../../../models/employee.model');
 Employee.create = jest.fn();
 
 describe('Test post /api/employee', () => {
   beforeAll(async () => {
     // INFO mock database connection
     db.mockResolvedValue(true);
-    app = await require('../../../index')();
+    app = await require('../../../../index')();
   });
   afterEach(() => {});
 

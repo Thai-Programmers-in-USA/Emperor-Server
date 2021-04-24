@@ -16,15 +16,15 @@
  */
 
 const request = require('supertest');
-const mockEmployeeList = require('../__mocks__/data/employees.json');
+const mockEmployeeList = require('../../__mocks__/data/employees.json');
 
 //INFO Mock model
-jest.mock('../../../models/employee.model');
-const Employee = require('../../../models/employee.model');
+jest.mock('../../../../models/employee.model');
+const Employee = require('../../../../models/employee.model');
 
 // INFO Mock database connection
-jest.mock('../../../models/index');
-const db = require('../../../models/index');
+jest.mock('../../../../models/index');
+const db = require('../../../../models/index');
 
 Employee.findAll = jest.fn();
 // db = jest.fn().mockImplementation(() => true);
@@ -36,7 +36,7 @@ describe('Test /api/signin', () => {
   beforeEach(async () => {
     db.mockReturnValue(Promise.resolve(true));
     // INFO Need to import here otherwise the db will not be mocked
-    app = await require('../../../index')();
+    app = await require('../../../../index')();
   });
   afterEach(() => {
     // jest.restoreAllMocks();

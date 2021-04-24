@@ -18,9 +18,9 @@ const bcrypt = require('bcrypt');
 const httpMock = require('node-mocks-http');
 
 // INFO Import modules
-const AuthControllers = require('../../../controllers/auth.controllers');
-const Employee = require('../../../models/employee.model');
-const mockEmployeeList = require('../__mocks__/data/employees.json');
+const AuthControllers = require('../../../../controllers/auth.controllers');
+const Employee = require('../../../../models/employee.model');
+const mockEmployeeList = require('../../__mocks__/data/employees.json');
 // let { validationResult } = require('express-validator');
 
 // INFO Mocking

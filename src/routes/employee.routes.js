@@ -4,7 +4,7 @@ const EmployeeControllers = require('../controllers/employee.controllers');
 
 module.exports = function (app) {
   router.post(
-    '/api/employee',
+    '/employee',
     [
       body('fName', 'Invalid First name')
         .trim()
@@ -36,5 +36,5 @@ module.exports = function (app) {
     EmployeeControllers.createUser
   );
 
-  app.use(router);
+  app.use('/api', router);
 };

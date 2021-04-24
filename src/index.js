@@ -32,9 +32,9 @@ app.use((error, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
-init = async function () {
+const init = async function () {
   try {
-    const db = require('./models/index');
+    const db = require('./models');
     const connection = await db();
     if (!connection) {
       throw new Error('Connection to DB errors');

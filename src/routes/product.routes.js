@@ -6,9 +6,9 @@ const { multipleUpload, singleUpload } = require('../middlewares/multer');
 module.exports = (app) => {
   const router = express.Router();
 
-  router.post('/api/product', multipleUpload, ProductControllers.createProduct);
+  router.post('/product', multipleUpload, ProductControllers.createProduct);
 
-  router.get('/api/products', ProductControllers.getProducts);
+  router.get('/products', ProductControllers.getProducts);
 
-  app.use(router);
+  app.use('/api', router);
 };

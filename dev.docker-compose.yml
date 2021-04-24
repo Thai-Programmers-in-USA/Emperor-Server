@@ -2,19 +2,14 @@ version: '3.8'
 
 services:
   server:
+    container_name: dev_emperor
     build: 
       context: .
       dockerfile: Dockerfile.dev
+    image: dev_emperor
     depends_on:
       - db
     restart: always
-    # environment:
-    #   DB_SCHEMA: postgres
-    #   DB_USER: postgres
-    #   DB_PASSWORD: postgres
-    #   DB_HOST: localhost
-    #   DB_PORT: 5432
-    #   DB_DIALECT: postgres
     volumes:
       - .:/app
       - /app/node_modules
@@ -22,7 +17,7 @@ services:
       - 3000:3000
 
   db:
-    image: 'postgres:13'
+    image: 'postgres:alpine'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

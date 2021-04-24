@@ -3,16 +3,21 @@
     "SECRET_TOKEN": "password",
     "TOKEN_ACTIVE_DURATION": "356h"
   },
+  "testci": {
+    "SECRET_TOKEN": "password",
+    "TOKEN_ACTIVE_DURATION": "10"
+  },
   "test": {
     "SECRET_TOKEN": "password",
     "TOKEN_ACTIVE_DURATION": "10"
   },
-  "testLocal": {
+  "testcd": {
     "SECRET_TOKEN": "password",
     "TOKEN_ACTIVE_DURATION": "10"
   },
   "production": {
-    
+    "SECRET_TOKEN": "password",
+    "TOKEN_ACTIVE_DURATION": "10"
   },
-  "S3_BUCKET_IMAGE": "/images"  
+  "S3_BUCKET_IMAGE": "/images"
 }

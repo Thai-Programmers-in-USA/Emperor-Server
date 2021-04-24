@@ -22,15 +22,15 @@
 const mockHttp = require('node-mocks-http');
 
 // INFO import modules
-const EmployeeControllers = require('../../../controllers/employee.controllers');
-const mockEmployeeList = require('../__mocks__/data/employees.json');
+const EmployeeControllers = require('../../../../controllers/employee.controllers');
+const mockEmployeeList = require('../../__mocks__/data/employees.json');
 
 // !-------------------------------------
 // INFO Mocking
 
 // SUB TOPIC: mocking Employee model
-jest.mock('../../../models/employee.model');
-const Employee = require('../../../models/employee.model');
+jest.mock('../../../../models/employee.model');
+const Employee = require('../../../../models/employee.model');
 
 // SUB TOPIC: mocking express-validation
 jest.mock('express-validator');
