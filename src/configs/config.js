@@ -6,6 +6,7 @@ const config = require('../configs/postgres_config.json')[env];
 const constantConfig = require('./constant_config.json')[env];
 
 let sequelize;
+let SECRET_TOKEN, TOKEN_ACTIVE_DURATION;
 
 if (config.production) {
   sequelize = new Sequelize(
@@ -25,6 +26,8 @@ if (config.production) {
       timezone: '-5:00',
     }
   );
+  SECRET_TOKEN = process.env[constantConfig.SECRET_TOKEN];
+  TOKEN_ACTIVE_DURATION = process.env[constantConfig.TOKEN_ACTIVE_DURATION];
 } else {
   sequelize = new Sequelize(
     config.database,
@@ -32,6 +35,8 @@ if (config.production) {
     config.password,
     config
   );
+  SECRET_TOKEN = constantConfig.SECRET_TOKEN;
+  TOKEN_ACTIVE_DURATION = constantConfig.TOKEN_ACTIVE_DURATION;
 }
 
 const {
@@ -47,8 +52,6 @@ const S3_CONFIG = {
     secretAccessKey: AWS_SECRET_KEY,
   },
 };
-
-const { SECRET_TOKEN, TOKEN_ACTIVE_DURATION } = constantConfig;
 
 module.exports = {
   sequelize,

@@ -1,5 +1,6 @@
 const ERROR_MSG = {
   INVALID_INPUTS: `Invalid input(s)`,
+  NOT_AUTHORIZED: `Not Authorized`
 };
 
 const VALIDATION_MSG = {

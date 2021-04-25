@@ -16,8 +16,9 @@
     "TOKEN_ACTIVE_DURATION": "10"
   },
   "production": {
-    "SECRET_TOKEN": "password",
-    "TOKEN_ACTIVE_DURATION": "10"
+    "production": true,
+    "SECRET_TOKEN": "SECRET_TOKEN",
+    "TOKEN_ACTIVE_DURATION": "TOKEN_ACTIVE_DURATION"
   },
   "S3_BUCKET_IMAGE": "/images"
 }
