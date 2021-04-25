@@ -1,21 +1,38 @@
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const postgresConfig = require('./postgres_config.json')[env];
-const constantConfig = require('./constant_config.json')[env];
 const dotenv = require('dotenv');
 dotenv.config();
+const env = process.env.NODE_ENV || 'development';
+const Sequelize = require('sequelize');
+const config = require('../configs/postgres_config.json')[env];
+const constantConfig = require('./constant_config.json')[env];
 
-const sequelize = new Sequelize(
-  process.env.DB_SCHEMA || postgresConfig.schama,
-  process.env.DB_USER || postgresConfig.username,
-  process.env.DB_PASSWORD || postgresConfig.password,
-  {
-    host: process.env.DB_HOST || postgresConfig.host,
-    port: process.env.DB_PORT || 5432,
-    dialect: process.env.DB_DIALECT || postgresConfig.dialect,
-    ...{ logging: false && env !== 'development' && env !== 'production' },
-  }
-);
+let sequelize;
+
+if (config.production) {
+  sequelize = new Sequelize(
+    process.env[config.database],
+    process.env[config.username],
+    process.env[config.password],
+    {
+      host: process.env[config.host],
+      dialect: process.env[config.dialect],
+      dialectOptions: {
+        useUTC: false,
+      },
+      ...(config.testproduction && { logging: false }),
+      pool: { maxConnections: 5, maxIdleTime: 30 },
+      language: 'en',
+      maxConcurrentQueries: 100,
+      timezone: '-5:00',
+    }
+  );
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
 
 const {
   AWS_REGION,

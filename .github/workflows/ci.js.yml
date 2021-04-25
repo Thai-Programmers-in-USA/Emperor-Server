@@ -19,7 +19,7 @@ jobs:
       # Label used to access the service container
       db:
         # Docker Hub image
-        image: postgres:13
+        image: postgres:alpine
         # Provide the password for postgres
         env:
           POSTGRES_USER: postgres
@@ -43,4 +43,4 @@ jobs:
       #   run: npm install
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test
+      - run: npm run test-ci
