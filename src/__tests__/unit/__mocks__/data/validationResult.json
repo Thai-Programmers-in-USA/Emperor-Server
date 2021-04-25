@@ -1,0 +1,14 @@
+{
+  "errors": [
+    {
+      "location": "body",
+      "msg": "Invalid value",
+      "param": "fName"
+    },
+    {
+      "location": "body",
+      "msg": "Invalid value",
+      "param": "lName"
+    }
+  ]
+}

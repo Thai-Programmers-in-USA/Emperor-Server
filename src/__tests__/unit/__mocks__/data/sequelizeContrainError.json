@@ -1,0 +1,65 @@
+{
+  "name": "SequelizeUniqueConstraintError",
+  "errors": [
+    {
+      "message": "name must be unique",
+      "type": "unique violation",
+      "path": "name",
+      "value": "Women",
+      "origin": "DB",
+      "instance": {
+        "id": null,
+        "name": "Women",
+        "updatedAt": "2021-04-09T17:39:58.191Z",
+        "createdAt": "2021-04-09T17:39:58.191Z"
+      },
+      "validatorKey": "not_unique",
+      "validatorName": null,
+      "validatorArgs": []
+    }
+  ],
+  "fields": {
+    "name": "Women"
+  },
+  "parent": {
+    "length": 209,
+    "name": "error",
+    "severity": "ERROR",
+    "code": "23505",
+    "detail": "Key (name)=(Women) already exists.",
+    "schema": "public",
+    "table": "categories",
+    "constraint": "categories_name_key",
+    "file": "nbtinsert.c",
+    "line": "656",
+    "routine": "_bt_check_unique",
+    "sql": "INSERT INTO \"categories\" (\"id\",\"name\",\"createdAt\",\"updatedAt\") VALUES (DEFAULT,$1,$2,$3) RETURNING \"id\",\"name\",\"createdAt\",\"updatedAt\";",
+    "parameters": [
+      "Women",
+      "2021-04-09 17:39:58.191 +00:00",
+      "2021-04-09 17:39:58.191 +00:00"
+    ]
+  },
+  "original": {
+    "length": 209,
+    "name": "error",
+    "severity": "ERROR",
+    "code": "23505",
+    "detail": "Key (name)=(Women) already exists.",
+    "schema": "public",
+    "table": "categories",
+    "constraint": "categories_name_key",
+    "file": "nbtinsert.c",
+    "line": "656",
+    "routine": "_bt_check_unique",
+    "sql": "INSERT INTO \"categories\" (\"id\",\"name\",\"createdAt\",\"updatedAt\") VALUES (DEFAULT,$1,$2,$3) RETURNING \"id\",\"name\",\"createdAt\",\"updatedAt\";",
+    "parameters": [
+      "Women",
+      "2021-04-09 17:39:58.191 +00:00",
+      "2021-04-09 17:39:58.191 +00:00"
+    ]
+  },
+  "sql": "INSERT INTO \"categories\" (\"id\",\"name\",\"createdAt\",\"updatedAt\") VALUES (DEFAULT,$1,$2,$3) RETURNING \"id\",\"name\",\"createdAt\",\"updatedAt\";",
+  "statusCode": 500,
+  "msg": "Validation error"
+}

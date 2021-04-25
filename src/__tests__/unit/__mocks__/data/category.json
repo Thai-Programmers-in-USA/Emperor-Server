@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Category 1",
+    "createdAt": "2021-03-26T13:07:34.000Z",
+    "updatedAt": "2021-03-26T13:07:34.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Category 2",
+    "createdAt": "2021-03-26T13:07:34.000Z",
+    "updatedAt": "2021-03-26T13:07:34.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Category 3",
+    "createdAt": "2021-03-26T13:07:34.000Z",
+    "updatedAt": "2021-03-26T13:07:34.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Category 4",
+    "createdAt": "2021-03-26T13:07:34.000Z",
+    "updatedAt": "2021-03-26T13:07:34.000Z"
+  }
+]

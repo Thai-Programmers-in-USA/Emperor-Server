@@ -1,0 +1,112 @@
+{
+  "request": {
+    "withPhoto": {
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [],
+      "categories": [],
+      "salePercentage": 0
+    },
+    "withPhotoStock": {
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [
+        {
+          "name": "stock1",
+          "price": 400,
+          "quantity": 100
+        },
+        {
+          "name": "stock1",
+          "price": 400,
+          "quantity": 200
+        },
+        {
+          "name": "stock1",
+          "price": 500,
+          "quantity": 50
+        }
+      ],
+      "categories": [],
+      "salePercentage": 0
+    },
+    "withCategory": {
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [],
+      "categories": [1, 2, 3],
+      "salePercentage": 0
+    }
+  },
+  "response": {
+    "withPhoto": {
+      "id": 1,
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [],
+      "categories": [],
+      "salePercentage": 0,
+      "photos": [
+        { "path": "product_photo_1", "position": 0 },
+        { "path": "product_photo_2", "position": 1 }
+      ]
+    },
+    "withPhotoStock": {
+      "id": 2,
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [
+        {
+          "name": "stock1",
+          "price": 400,
+          "quantity": 100,
+          "photo": "stock_photo_1"
+        },
+        {
+          "name": "stock2",
+          "price": 400,
+          "quantity": 200,
+          "photo": "stock_photo_2"
+        },
+        {
+          "name": "stock3",
+          "price": 500,
+          "quantity": 50,
+          "photo": "stock_photo_3"
+        }
+      ],
+      "categories": [],
+      "salePercentage": 0,
+      "photos": [
+        { "path": "product_photo_1", "position": 0 },
+        { "path": "product_photo_2", "position": 1 }
+      ]
+    },
+    "withCategory": {
+      "id": 3,
+      "name": "product with photos",
+      "isOnSale": 50,
+      "isNewArrival": false,
+      "description": "",
+      "price": 400,
+      "stocks": [],
+      "categories": [1, 2, 3],
+      "salePercentage": 0
+    }
+  }
+}

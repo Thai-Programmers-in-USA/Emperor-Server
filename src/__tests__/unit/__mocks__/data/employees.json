@@ -1,0 +1,39 @@
+[
+  {
+    "id": "1",
+    "fName": "Test1_firstName",
+    "lName": "Test1_lastName",
+    "email": "test1@test.com",
+    "password": "$2b$12$PEeBHzzJM6pxBzmlBFlMI.tKl.W5Qng4pOoObETdIF4l9MZCtcM7.",
+    "authorizationLevel":"editor",
+    "createdAt": "2021-03-26T13:07:34.000Z",
+    "updatedAt": "2021-03-26T13:07:34.000Z"
+  },
+  {
+    "id": "2",
+    "fName": "Test2_firstName",
+    "lName": "Test2_lastName",
+    "email": "test2@test.com",
+    "password": "$2b$12$PEeBHzzJM6pxBzmlBFlMI.tKl.W5Qng4pOoObETdIF4l9MZCtcM7.",
+    "authorizationLevel":"admin",
+    "createdAt": "2021-03-28T13:09:50.000Z",
+    "updatedAt": "2021-04-13T13:07:34.000Z"
+  },
+  {
+    "fName": "Test3_firstName",
+    "lName": "Test3_lastName",
+    "email": "test3@test.com",
+    "password": "passwordD9",
+    "authorizationLevel":"employee"
+  },
+  {
+    "id": "3",
+    "fName": "Test3_firstName",
+    "lName": "Test3_lastName",
+    "email": "test3@test.com",
+    "password": "$2b$12$PEeBHzzJM6pxBzmlBFlMI.tKl.W5Qng4pOoObETdIF4l9MZCtcM7.",
+    "authorizationLevel":"employee",
+    "createdAt": "2021-03-28T13:09:50.000Z",
+    "updatedAt": "2021-04-13T13:07:34.000Z"
+  }
+]

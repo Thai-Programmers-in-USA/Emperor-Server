@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create",
-    "test-ci": "NODE_ENV=testci LOG_LEVEL=off jest --verbose --coverage --detectOpenHandles --maxWorkers=1 --testTimeout=10000",
+    "test-ci": "NODE_ENV=testci LOG_LEVEL=off jest --verbose --coverage --detectOpenHandles --maxWorkers=1 --testTimeout=10000 --forceExit",
     "pretest-ci": "NODE_ENV=testci npm run db:reset",
     "test-dev": "NODE_ENV=test LOG_LEVEL=off PORT=3005 jest --verbose --watchAll --coverage --detectOpenHandles --maxWorkers=1 --testTimeout=10000",
     "pretest-dev":"NODE_ENV=test npm run db:reset",

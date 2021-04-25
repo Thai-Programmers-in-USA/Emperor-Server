@@ -41,7 +41,7 @@ const init = async function () {
     }
     logger.info('is successfully connected to the DB');
 
-    if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'testLocal')
+    if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'testci' && process.env.NODE_ENV !== 'testcd')
       app.listen(PORT, function () {
         logger.info(`emperor-backend listening on http://localhost:${PORT}`);
       });
